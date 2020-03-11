@@ -6,7 +6,7 @@ async function getBiSubByKeyword(keyword) {
     let video_list = [];
     const browser = await puppeteer.launch({
         // slowMo: 100,    //slow
-        headless: false,
+        headless: true,
         // defaultViewport: {width: 1440, height: 780},
         ignoreHTTPSErrors: false, //忽略 https 阻断
         args: ['--proxy-server='] //cancel proxy
@@ -29,7 +29,8 @@ async function getBiSubByKeyword(keyword) {
                 'watch_num': null,
                 'fly_num': null,
                 'up_name': null,
-                'upload_time': null
+                'upload_time': null,
+                video_duration: null
             };
             let titleDom = await titleList[i].$x(`@title`);
             video_info.title = await page.evaluate(result => result.textContent, titleDom[0]);
@@ -41,6 +42,8 @@ async function getBiSubByKeyword(keyword) {
             video_info.up_name = await page.evaluate(result => result.textContent, up_nameDom[0]);
             let upload_timeDom = await titleList[i].$x(`../../div[@class='tags']/span[@class='so-icon time']`);
             video_info.upload_time = await page.evaluate(result => result.textContent, upload_timeDom[0]);
+            let video_durationDom = await titleList[i].$x(`../../..//span[@class='so-imgTag_rb']`);
+            video_info.video_duration = await page.evaluate(result => result.textContent, video_durationDom[0]);
             console.log(video_info);
             video_list.push(video_info);
         }
