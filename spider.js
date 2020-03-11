@@ -30,7 +30,7 @@ async function getBiSubByKeyword(keyword) {
                 'fly_num': null,
                 'up_name': null,
                 'upload_time': null,
-                video_duration: null
+                'video_duration': null
             };
             let titleDom = await titleList[i].$x(`@title`);
             video_info.title = await page.evaluate(result => result.textContent, titleDom[0]);
