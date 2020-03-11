@@ -14,6 +14,7 @@ author: Kelly Cheng
 - 弹幕数量
 - up主名称
 - 观看次数
+- 视频时长
 
 ### 环境 ###
 Node V11+ ，依赖包可根据package.json按照部署。
